@@ -26,7 +26,7 @@
     
     _leftLab = [[UILabel alloc] init];
     _leftLab.font = [UIFont systemFontOfSize:15];
-    _leftLab.textColor = ColorLightText;
+    _leftLab.textColor = ColorText;
     _leftLab.textAlignment = NSTextAlignmentLeft;
     
     [self.contentView addSubview:_leftLab];
@@ -41,8 +41,6 @@
     _bottomLine = [[UIImageView alloc] init];
     _bottomLine.backgroundColor = ColorTableBackColor;
     [self.contentView addSubview:_bottomLine];
-    
-    
     
 }
 
@@ -59,7 +57,8 @@
     [_textFiled mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.left.equalTo(_leftLab.mas_right).offset([JNSHAutoSize width:10]);
-        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:200], [JNSHAutoSize height:20]));
+        make.height.mas_equalTo( [JNSHAutoSize height:20]);
+        make.right.equalTo(self).offset(-[JNSHAutoSize width: 10]);
     }];
     
     [_bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {

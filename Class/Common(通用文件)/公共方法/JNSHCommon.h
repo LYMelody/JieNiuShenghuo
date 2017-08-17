@@ -24,6 +24,7 @@
 
 #define lightOrgeron [UIColor colorWithRed:255/255.0 green:227/255.0 blue:209/255.0 alpha:1]
 
+#define greenColor [UIColor colorWithRed:32/255.0 green:151/255.0 blue:4/255.0 alpha:1]
 
 
 

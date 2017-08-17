@@ -23,4 +23,6 @@ typedef void(^bankCardSelectBlock)(void);
 
 @property(nonatomic,copy)bankCardSelectBlock cardSelectBlock;
 
+@property(nonatomic,assign)NSInteger tag;
+
 @end

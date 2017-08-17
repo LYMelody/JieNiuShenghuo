@@ -51,11 +51,11 @@
     footView.backgroundColor = ColorTableBackColor;
     footView.userInteractionEnabled = YES;
     
-    JNSHCommonButton *CommitBtn = [[JNSHCommonButton alloc] initWithFrame:CGRectMake([JNSHAutoSize width:15], [JNSHAutoSize height:17], (KscreenWidth - [JNSHAutoSize width:30]), [JNSHAutoSize height:36])];
+    JNSHCommonButton *CommitBtn = [[JNSHCommonButton alloc] initWithFrame:CGRectMake([JNSHAutoSize width:15], [JNSHAutoSize height:17], (KscreenWidth - [JNSHAutoSize width:30]), [JNSHAutoSize height:41])];
     [CommitBtn addTarget:self action:@selector(commit) forControlEvents:UIControlEventTouchUpInside];
     [CommitBtn setTitle:@"确认提交" forState:UIControlStateNormal];
     [footView addSubview:CommitBtn];
-   
+    
     table.tableFooterView = footView;
     
     //tableheaderView

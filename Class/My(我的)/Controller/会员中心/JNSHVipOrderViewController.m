@@ -142,7 +142,7 @@
         [CardCell.textFiled resignFirstResponder];
         
         Popview = [[JNSHPopBankCardView alloc] initWithFrame:CGRectMake(0, 0, KscreenWidth, KscreenHeight)];
-        
+        Popview.typetag = 1;
         __block JNSHLabFldCell *Card = CardCell;
         
         Popview.addnewCardBlock = ^{

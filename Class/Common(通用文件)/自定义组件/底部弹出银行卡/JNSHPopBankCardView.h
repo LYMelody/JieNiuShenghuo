@@ -20,6 +20,7 @@ typedef void(^AddNewCardBlock)(void);
 
 @property(nonatomic,copy)AddNewCardBlock addnewCardBlock;
 
+@property(nonatomic,assign)NSInteger typetag;
 
 - (void)showInView:(UIView *)view;
 

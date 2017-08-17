@@ -14,6 +14,10 @@
 #import "JNSYAccountMessageViewController.h"
 #import "JNSHSettingViewController.h"
 #import "JNSHReallNameController.h"
+#import "JNSHSettlementCardController.h"
+#import "JNSHSettleDetailController.h"
+#import "JNSHOrderViewController.h"
+#import "JNSHTicketsController.h"
 @interface JNSHMyViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -246,6 +250,28 @@
         JNSHReallNameController *RealNameVc = [[JNSHReallNameController alloc] init];
         RealNameVc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:RealNameVc animated:YES];
+        
+    }else if (indexPath.row == 6) { //结算卡
+        JNSHSettlementCardController *CardVc = [[JNSHSettlementCardController alloc] init];
+        CardVc.hidesBottomBarWhenPushed = YES;
+        //[self.navigationController pushViewController:CardVc animated:YES];
+        
+        JNSHSettleDetailController *Detail = [[JNSHSettleDetailController alloc] init];
+        Detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:Detail animated:YES];
+        
+        
+    }else if (indexPath.row == 8) {   //订单
+        JNSHOrderViewController *OrderVc = [[JNSHOrderViewController alloc] init];
+        OrderVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:OrderVc animated:YES];
+        
+    }else if (indexPath.row == 9) {    //卡包券
+        
+        JNSHTicketsController *ticketVc = [[JNSHTicketsController alloc] init];
+        ticketVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:ticketVc animated:YES];
+        
         
     }
     
