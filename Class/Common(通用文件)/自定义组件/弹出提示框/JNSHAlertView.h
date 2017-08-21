@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef void(^SureAlertBlock)(void);
+
 @interface JNSHAlertView : UIView
 
 @property(nonatomic,strong)UIView *contentView;
@@ -17,6 +20,13 @@
 @property(nonatomic,copy)UIColor *color;
 
 @property(nonatomic,strong)UIButton *sureBtn;
+
+@property(nonatomic,strong)UIButton *cancleBtn;
+
+@property(nonatomic,copy)SureAlertBlock sureAlertBlock;
+
+
+- (id)initWithFrame:(CGRect)frame cancle:(NSString *)cancletext sure:(NSString *)suretext;
 
 - (void)show:(NSString *)message inView:(UIView *)view;
 

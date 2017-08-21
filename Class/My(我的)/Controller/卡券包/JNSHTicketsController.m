@@ -39,7 +39,7 @@
     backimg.alpha = 0;
     
     
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    //[self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -57,7 +57,6 @@
     //backimg.alpha = 1;
     
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -129,7 +128,6 @@
         make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:200], [JNSHAutoSize height:15]));
     }];
     
-    
     UILabel *subTitleLab = [[UILabel alloc] init];
     subTitleLab.text = @"每天10点、14点可领取";
     subTitleLab.font = [UIFont systemFontOfSize:13];
@@ -144,9 +142,8 @@
         make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:200], [JNSHAutoSize height:15]));
     }];
     
-    
-    table.hidden = YES;
-    backImg.hidden = NO;
+    table.hidden = NO;
+    backImg.hidden = YES;
     
 }
 

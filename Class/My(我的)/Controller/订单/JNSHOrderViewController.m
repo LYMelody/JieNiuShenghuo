@@ -54,6 +54,13 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
+    
+    
+    UIImageView *backImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KscreenWidth, 64)];
+    backImg.backgroundColor = ColorTabBarBackColor;
+    backImg.userInteractionEnabled = YES;
+    [self.view addSubview:backImg];
+    
     [self setPickViews];
     
     table = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 +[JNSHAutoSize height:46], KscreenWidth, KscreenHeight - [JNSHAutoSize height:110]) style:UITableViewStylePlain];

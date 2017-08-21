@@ -11,13 +11,17 @@
 
 @implementation JNSHAlertView
 
-- (id)initWithFrame:(CGRect)frame {
+
+- (id)initWithFrame:(CGRect)frame cancle:(NSString *)cancletext sure:(NSString *)suretext {
     
-    if ([super initWithFrame:frame]) {
+     self =  [super initWithFrame:frame];
+    
+    if (self ) {
         
-        _color = blueColor;
         
-        [self setUpViews];
+        [self setUpViews:cancletext suretext:suretext];
+        
+        
     }
     
     return self;
@@ -25,7 +29,21 @@
 }
 
 
-- (void)setUpViews{
+- (id)initWithFrame:(CGRect)frame {
+    
+    if ([super initWithFrame:frame]) {
+        
+        _color = blueColor;
+        
+        [self setUpViews:nil suretext:@"确定"];
+    }
+    
+    return self;
+    
+}
+
+
+- (void)setUpViews:(NSString *)cancel suretext:(NSString *)suretext{
     
     self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.0];
     self.userInteractionEnabled = YES;
@@ -38,39 +56,96 @@
     
     _contentView = [[UIView alloc] init];
     _contentView.backgroundColor = [UIColor whiteColor];
-    _contentView.layer.cornerRadius = 3;
+    _contentView.layer.cornerRadius = 10;
     _contentView.layer.masksToBounds = YES;
-    _contentView.frame = CGRectMake((KscreenWidth - 211)/2.0, KscreenHeight, [JNSHAutoSize width:211], [JNSHAutoSize height:106]);
-
+    _contentView.frame = CGRectMake((KscreenWidth - 210)/2.0, KscreenHeight, [JNSHAutoSize width:210], [JNSHAutoSize height:125]);
+    if (cancel != nil) {
+        _contentView.frame = CGRectMake((KscreenWidth - 251)/2.0, KscreenHeight, [JNSHAutoSize width:251], [JNSHAutoSize height:151]);
+    }
     _contentView.center = self.center;
     _contentView.hidden = YES;
     [self addSubview:_contentView];
     
-    _messageLab = [[UILabel alloc] initWithFrame:CGRectMake(0, [JNSHAutoSize height:28], [JNSHAutoSize width:211], [JNSHAutoSize height:15])];
+    _messageLab = [[UILabel alloc] initWithFrame:CGRectMake(0, [JNSHAutoSize height:28], [JNSHAutoSize width:211], [JNSHAutoSize height:40])];
+    
+    if (cancel != nil) {
+        _messageLab = [[UILabel alloc] initWithFrame:CGRectMake(0, [JNSHAutoSize height:32], [JNSHAutoSize width:251], [JNSHAutoSize height:40])];
+    }
+    
     _messageLab.font = [UIFont systemFontOfSize:15];
     _messageLab.textColor = ColorText;
     _messageLab.textAlignment = NSTextAlignmentCenter;
-    
+    _messageLab.numberOfLines = 0;
     [_contentView addSubview:_messageLab];
     
+    
+    self.cancleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.cancleBtn setTitle:cancel forState:UIControlStateNormal];
+    [self.cancleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.cancleBtn.layer.cornerRadius = 3;
+    self.cancleBtn.layer.masksToBounds = YES;
+    self.cancleBtn.backgroundColor = blueColor;
+    self.cancleBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    self.cancleBtn.hidden = YES;
+    [self.cancleBtn addTarget:self action:@selector(cancle) forControlEvents:UIControlEventTouchUpInside];
+    [_contentView addSubview:self.cancleBtn];
+    
+    [self.cancleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(_contentView).offset(-[JNSHAutoSize height:60]);
+        make.left.equalTo(_contentView).offset([JNSHAutoSize width:44]);
+        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:71], [JNSHAutoSize height:26]));
+    }];
+    
+    if (cancel != nil) {
+        self.cancleBtn.hidden = NO;
+    }
+    
     _sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_sureBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [_sureBtn setTitle:suretext forState:UIControlStateNormal];
     [_sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _sureBtn.layer.cornerRadius = 3;
     _sureBtn.layer.masksToBounds = YES;
     _sureBtn.backgroundColor = blueColor;
     _sureBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    _sureBtn.frame = CGRectMake([JNSHAutoSize width:(111)]/2.0, [JNSHAutoSize height:62], [JNSHAutoSize width:100], [JNSHAutoSize height:26]);
+    _sureBtn.frame = CGRectMake([JNSHAutoSize width:(111)]/2.0, [JNSHAutoSize height:82], [JNSHAutoSize width:100], [JNSHAutoSize height:26]);
     [_sureBtn addTarget:self action:@selector(sure) forControlEvents:UIControlEventTouchUpInside];
     [_contentView addSubview:_sureBtn];
-
+    
+    if (cancel != nil) {
+        
+        [_sureBtn setBackgroundColor:ColorTabBarBackColor];
+        
+        [_sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.cancleBtn);
+            make.right.equalTo(_contentView).offset(-[JNSHAutoSize width:84]);
+            make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:71], [JNSHAutoSize height:26]));
+        }];
+    }
+    
+    
 }
 
 - (void)sure {
     
+//    if () {
+//        <#statements#>
+//    }
+//    
+//    [self dismiss];
+    
+    if (self.sureAlertBlock) {
+        self.sureAlertBlock();
+    }
+    
+    
+}
+
+- (void)cancle {
+    
     [self dismiss];
     
 }
+
 
 - (void)show:(NSString *)message inView:(UIView *)view {
     

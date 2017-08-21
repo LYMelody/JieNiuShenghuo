@@ -45,14 +45,15 @@
 //    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     
     
+    //设置导航栏背景色为透明
+    UIImageView *backImg = self.navigationController.navigationBar.subviews.firstObject;
+    backImg.alpha = 0;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
    
     
-    //设置导航栏背景色为透明
-    UIImageView *backImg = self.navigationController.navigationBar.subviews.firstObject;
-    backImg.alpha = 0;
+   
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

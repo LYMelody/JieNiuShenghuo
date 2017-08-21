@@ -12,6 +12,7 @@
 #import "JNSYHighLightImageView.h"
 #import "JNSHProgressView.h"
 #import "JNSHTimeCountDownView.h"
+#import "JNSHCashDeskViewController.h"
 @interface JNSHHomeViewController ()
 
 @end
@@ -45,6 +46,10 @@
 
     self.view.backgroundColor = ColorTableBackColor;
     
+    //返回按钮
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     //右侧消息按钮
     UIButton *MessageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     MessageBtn.frame = CGRectMake(0, 0, 38, 38);
@@ -70,6 +75,12 @@
         make.top.equalTo(ADimgView.mas_bottom);
         make.size.mas_offset(CGSizeMake((KscreenWidth - 2)/2.0, [JNSHAutoSize height:72]));
     }];
+    
+    //tap
+    UITapGestureRecognizer *CashTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(CashTapAction)];
+    CashTap.numberOfTapsRequired = 1;
+    [CashBackImg addGestureRecognizer:CashTap];
+    
     
     UIImageView *CashLogo = [[UIImageView alloc] init];
     CashLogo.image = [UIImage imageNamed:@"home_grid_1_1"];
@@ -378,6 +389,17 @@
     
     
     
+    
+}
+
+//收银台
+- (void)CashTapAction {
+    
+    NSLog(@"收银台");
+    
+    JNSHCashDeskViewController *jnshCashDeskVc = [[JNSHCashDeskViewController alloc] init];
+    jnshCashDeskVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:jnshCashDeskVc animated:YES];
     
 }
 

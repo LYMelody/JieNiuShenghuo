@@ -39,7 +39,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KscreenWidth, KscreenHeight  )];
+    UIImageView *backImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KscreenWidth, KscreenHeight)];
+    backImg.backgroundColor = ColorTabBarBackColor;
+    backImg.userInteractionEnabled = YES;
+    [self.view addSubview:backImg];
+    
+    
+    table = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, KscreenWidth, KscreenHeight -64 )];
     table.dataSource = self;
     table.delegate = self;
     table.backgroundColor = ColorTableBackColor;
@@ -100,6 +106,11 @@
     NSLog(@"提交");
     
     JNSHAlertView *alertView = [[JNSHAlertView alloc] initWithFrame:CGRectMake(0, 0, KscreenWidth, KscreenHeight)];
+    __block typeof(JNSHAlertView) *alert = alertView;
+    alertView.sureAlertBlock = ^{
+        
+        [alert dismiss];
+    };
     [alertView show:@"姓名不能为空" inView:self.view];
     
 }

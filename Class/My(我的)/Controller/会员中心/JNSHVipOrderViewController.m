@@ -37,7 +37,12 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-    UITableView *table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KscreenWidth, KscreenHeight)];
+    UIImageView *backImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KscreenWidth, KscreenHeight)];
+    backImg.backgroundColor = ColorTabBarBackColor;
+    backImg.userInteractionEnabled = YES;
+    [self.view addSubview:backImg];
+    
+    UITableView *table = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, KscreenWidth, KscreenHeight - 64)];
     table.delegate = self;
     table.dataSource = self;
     table.separatorStyle = UITableViewCellSeparatorStyleNone;

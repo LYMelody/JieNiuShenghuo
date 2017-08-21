@@ -52,8 +52,11 @@
     [MyNav.navigationBar setTitleTextAttributes:@{
                                                   NSForegroundColorAttributeName:[UIColor whiteColor]
                                                   }];
+    //MyNav.navigationBar.translucent = NO;
+    
     self.viewControllers = @[homenAV,shoppingNav,serviceNav,MyNav];
     
+    //工具栏字体颜色
     self.tabBar.tintColor = ColorTabBarBackColor;
     
     

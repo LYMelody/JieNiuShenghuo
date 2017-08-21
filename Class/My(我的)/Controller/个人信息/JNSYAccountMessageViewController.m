@@ -21,7 +21,7 @@
 #import "JNSHAccountInfoCell.h"
 
 
-@interface JNSYAccountMessageViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface JNSYAccountMessageViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 
 @end
@@ -51,9 +51,15 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
-    table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KscreenWidth, KscreenHeight) style:UITableViewStylePlain];
+    UIImageView *backImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KscreenWidth, KscreenHeight)];
+    backImg.backgroundColor = ColorTabBarBackColor;
+    backImg.userInteractionEnabled = YES;
+    [self.view addSubview:backImg];
+    
+    table = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, KscreenWidth, KscreenHeight - 64) style:UITableViewStylePlain];
     table.delegate = self;
     table.dataSource = self;
     table.backgroundColor = ColorTableBackColor;
@@ -64,6 +70,7 @@
     
     [self.view addSubview:table];
     
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
 }
 

@@ -18,7 +18,9 @@
 #import "JNSHSettleDetailController.h"
 #import "JNSHOrderViewController.h"
 #import "JNSHTicketsController.h"
-@interface JNSHMyViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "JNSHInvateController.h"
+
+@interface JNSHMyViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 @end
 
@@ -34,31 +36,65 @@
     
     [super viewWillAppear:animated];
 
-    [table reloadData];
     
-}
-
-- (void)viewDidAppear:(BOOL)animated {
+    //self.navigationController.navigationBar.translucent = NO;
+    
+    //[[UINavigationBar appearance] setTranslucent:NO];
+    
+    //隐藏黑线
+    self.navigationController.navigationBar.subviews[0].subviews[0].hidden = YES;
+    
+    [super viewDidAppear:animated];
     
     barBackImg = self.navigationController.navigationBar.subviews.firstObject;
     barBackImg.alpha = 0;
     self.navigationItem.title = @"";
     
-    self.tabBarController.tabBar.translucent = YES;
     
-    [super viewDidAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
+    
+    [table reloadData];
+    
+}
+
+//- (void)viewDidAppear:(BOOL)animated {
+//    
+//    
+//    [super viewDidAppear:animated];
+//    
+//    barBackImg = self.navigationController.navigationBar.subviews.firstObject;
+//    barBackImg.alpha = 0;
+//    self.navigationItem.title = @"";
+//
+//}
+
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    
+    
+    if (self.childViewControllers.count == 1) {
+        return NO;
+    }
+    
+    CGFloat x = [gestureRecognizer locationInView:self.view].x;
+    
+    NSLog(@"%f",x);
+    return YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     
-    barBackImg.alpha = 1;
     
+    //self.navigationController.navigationBar.translucent = YES;
+    
+    barBackImg.alpha = 1;
 }
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
     
     //返回按钮
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
@@ -74,7 +110,7 @@
     //取消tableView自动布局
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KscreenWidth, KscreenHeight - 49) style:UITableViewStylePlain];
+    table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KscreenWidth, KscreenHeight - 49 ) style:UITableViewStylePlain];
     table.delegate = self;
     table.dataSource = self;
     table.backgroundColor = ColorTableBackColor;
@@ -273,6 +309,12 @@
         [self.navigationController pushViewController:ticketVc animated:YES];
         
         
+    }else if (indexPath.row == 11) {  //邀请码
+        
+        JNSHInvateController *InvateVc = [[JNSHInvateController alloc] init];
+        InvateVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:InvateVc animated:YES];
+        
     }
     
 }
@@ -286,8 +328,12 @@
     
     //控制导航栏的透明度
     if (y >= 64) {
+        //隐藏黑线
+        self.navigationController.navigationBar.subviews[0].subviews[0].hidden = NO;
+        
         barBackImg.alpha = 1;
         self.navigationItem.title = @"我";
+        
     }else if (y < 64) {
         barBackImg.alpha = 0;
         self.navigationItem.title = @"";
