@@ -48,7 +48,6 @@
     self.contentView.userInteractionEnabled = YES;
     
     //付款方式
-    
     UIImageView *backImg = [[UIImageView alloc] init];
     backImg.backgroundColor = [UIColor whiteColor];
     backImg.userInteractionEnabled = YES;
@@ -166,7 +165,6 @@
 }
 
 - (void)showInView:(UIView *)view {
-    
     
     if (!view) {
         return;

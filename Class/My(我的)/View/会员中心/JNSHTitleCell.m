@@ -56,13 +56,13 @@
     [_leftLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.left.equalTo(self).offset([JNSHAutoSize width:16]);
-        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:80], [JNSHAutoSize height:20]));
+        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:90], [JNSHAutoSize height:20]));
     }];
     
     [_rightLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.left.equalTo(_leftLab.mas_right).offset([JNSHAutoSize width:10]);
-        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:80], [JNSHAutoSize height:20]));
+        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:180], [JNSHAutoSize height:20]));
     }];
     
     [_bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {

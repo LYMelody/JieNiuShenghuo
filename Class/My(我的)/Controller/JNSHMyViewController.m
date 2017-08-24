@@ -19,7 +19,7 @@
 #import "JNSHOrderViewController.h"
 #import "JNSHTicketsController.h"
 #import "JNSHInvateController.h"
-
+#import "JNSHLoginController.h"
 @interface JNSHMyViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 @end
@@ -270,10 +270,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 1) { //个人信息
-        JNSYAccountMessageViewController *AccountVc = [[JNSYAccountMessageViewController alloc] init];
-        AccountVc.hidesBottomBarWhenPushed = YES;
+//        JNSYAccountMessageViewController *AccountVc = [[JNSYAccountMessageViewController alloc] init];
+//        AccountVc.hidesBottomBarWhenPushed = YES;
+//        
+//        [self.navigationController pushViewController:AccountVc animated:YES];
         
-        [self.navigationController pushViewController:AccountVc animated:YES];
+        JNSHLoginController *LogInVc = [[JNSHLoginController alloc] init];
+        //LogInVc.hidesBottomBarWhenPushed = YES;
+        
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:LogInVc];
+        
+        [self presentViewController:nav animated:YES completion:nil];
         
     }
     

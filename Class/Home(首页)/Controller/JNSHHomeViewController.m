@@ -167,7 +167,7 @@
     }];
     
     UILabel *CardLab = [[UILabel alloc] init];
-    CardLab.text = @"信用卡助手";
+    CardLab.text = @"办信用卡";
     CardLab.textColor = ColorText;
     CardLab.textAlignment = NSTextAlignmentLeft;
     CardLab.font = [UIFont systemFontOfSize:15];
@@ -192,17 +192,17 @@
     }];
     
     UIImageView *ExpressLogoImg = [[UIImageView alloc] init];
-    ExpressLogoImg.image = [UIImage imageNamed:@"home_grid_2_2"];
+    ExpressLogoImg.image = [UIImage imageNamed:@"home_grid_2_2-1"];
     [ExpressBackImg addSubview:ExpressLogoImg];
     
     [ExpressLogoImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(ExpressBackImg);
         make.left.equalTo(ExpressBackImg).offset([JNSHAutoSize width:33]);
-        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:40], [JNSHAutoSize height:40]));
+        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:43], [JNSHAutoSize height:43]));
     }];
     
     UILabel *ExpressLab = [[UILabel alloc] init];
-    ExpressLab.text = @"快递助手";
+    ExpressLab.text = @"我要贷款";
     ExpressLab.textAlignment = NSTextAlignmentLeft;
     ExpressLab.font = [UIFont systemFontOfSize:15];
     ExpressLab.textColor = ColorText;

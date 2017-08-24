@@ -97,9 +97,9 @@
     self.useBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.useBtn setTitle:@"立即使用" forState:UIControlStateNormal];
     [self.useBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.useBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    self.useBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     self.useBtn.backgroundColor = blueColor;
-    self.useBtn.layer.cornerRadius = 3;
+    self.useBtn.layer.cornerRadius = 2;
     self.useBtn.layer.masksToBounds = YES;
     
     [self.backImg addSubview:self.useBtn];
@@ -107,7 +107,7 @@
     [self.useBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLab);
         make.right.equalTo(self.backImg).offset(-[JNSHAutoSize width:20]);
-        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:66], [JNSHAutoSize height:20]));
+        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:68], [JNSHAutoSize height:25]));
     }];
     
     self.usedImg = [[UIImageView alloc] init];
@@ -121,8 +121,6 @@
         make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:45], [JNSHAutoSize height:45]));
     }];
 }
-
-
 
 - (void)layoutSubviews {
     

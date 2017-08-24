@@ -76,6 +76,20 @@
     
     [self.view addSubview:table];
     
+    //禁止滑动延迟
+    table.delaysContentTouches = NO;
+    for(id view in table.subviews) {
+        
+        if ([NSStringFromClass([view class]) isEqualToString:@"UITableViewWrapperView"]) {
+            if ([view isKindOfClass:[UIScrollView class]]) {
+                UIScrollView *scrrowView = (UIScrollView *)view;
+                scrrowView.delaysContentTouches = NO;
+            }
+            break;
+        }
+    }
+    
+    
 }
 
 //下一步

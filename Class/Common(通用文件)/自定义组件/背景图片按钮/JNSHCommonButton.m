@@ -37,6 +37,8 @@
 
 - (void)setEnabled:(BOOL)enabled {
     
+    [super setEnabled:enabled];
+    
     if (enabled) {
        [self setBackgroundImage:[UIImage imageNamed:@"btn_nor"] forState:UIControlStateNormal];
     }else {

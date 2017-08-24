@@ -14,6 +14,9 @@
 #import "DAYCalendarView.h"
 #import "JNSHCalendarView.h"
 #import "JNSHOrderDetailController.h"
+
+
+
 @interface JNSHOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,assign)NSInteger selectIndex;
@@ -54,8 +57,6 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-    
-    
     UIImageView *backImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, KscreenWidth, 64)];
     backImg.backgroundColor = ColorTabBarBackColor;
     backImg.userInteractionEnabled = YES;
@@ -94,7 +95,6 @@
     dateTap.numberOfTapsRequired = 1;
     
     [dateImg addGestureRecognizer:dateTap];
-    
     
     UILabel *dateLab = [[UILabel alloc] init];
     dateLab.font = [UIFont systemFontOfSize:15];

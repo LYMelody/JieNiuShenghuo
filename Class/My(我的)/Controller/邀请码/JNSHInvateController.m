@@ -116,7 +116,7 @@
     [detailLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(backImg);
         make.top.equalTo(erCodeImg.mas_bottom).offset([JNSHAutoSize height:13]);
-        make.size.mas_equalTo(CGSizeMake(KscreenWidth, [JNSHAutoSize height:30]));
+        make.size.mas_equalTo(CGSizeMake(KscreenWidth, [JNSHAutoSize height:35]));
     }];
     
 }

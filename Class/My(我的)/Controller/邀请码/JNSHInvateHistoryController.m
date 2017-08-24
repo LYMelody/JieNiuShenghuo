@@ -71,7 +71,7 @@
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(headerView);
         make.left.equalTo(headerView).offset([JNSHAutoSize width:16]);
-        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:200], [JNSHAutoSize height:15]));
+        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:260], [JNSHAutoSize height:15]));
     }];
     
     UIButton *changeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -88,7 +88,7 @@
     [changeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(headerView);
         make.right.equalTo(headerView).offset(-[JNSHAutoSize width:23]);
-        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:70], [JNSHAutoSize height:20]));
+        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:70], [JNSHAutoSize height:25]));
     }];
     
     if (self.tag == 2) {

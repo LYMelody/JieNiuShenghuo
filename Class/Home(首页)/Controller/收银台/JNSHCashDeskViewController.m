@@ -9,7 +9,7 @@
 #import "JNSHCashDeskViewController.h"
 #import "Masonry.h"
 #import "JNSHAlertView.h"
-
+#import "JNSHOrderSureViewController.h"
 @interface JNSHCashDeskViewController ()
 
 @end
@@ -280,8 +280,14 @@
         
         NSLog(@"确定");
         
-        [self show:@"请进行实名认证" cancle:@"取消" sureStr:@"去认证"];
+        //[self show:@"请进行实名认证" cancle:@"取消" sureStr:@"去认证"];
        
+        
+        JNSHOrderSureViewController *OrderSureVc = [[JNSHOrderSureViewController alloc] init];
+        OrderSureVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:OrderSureVc animated:YES];
+        
+        
         
     }
     

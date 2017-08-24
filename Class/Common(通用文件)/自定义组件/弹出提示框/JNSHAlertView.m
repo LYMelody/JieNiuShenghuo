@@ -66,10 +66,10 @@
     _contentView.hidden = YES;
     [self addSubview:_contentView];
     
-    _messageLab = [[UILabel alloc] initWithFrame:CGRectMake(0, [JNSHAutoSize height:28], [JNSHAutoSize width:211], [JNSHAutoSize height:40])];
+    _messageLab = [[UILabel alloc] initWithFrame:CGRectMake(0, [JNSHAutoSize height:25], [JNSHAutoSize width:211], [JNSHAutoSize height:40])];
     
     if (cancel != nil) {
-        _messageLab = [[UILabel alloc] initWithFrame:CGRectMake(0, [JNSHAutoSize height:32], [JNSHAutoSize width:251], [JNSHAutoSize height:40])];
+        _messageLab = [[UILabel alloc] initWithFrame:CGRectMake(0, [JNSHAutoSize height:25], [JNSHAutoSize width:251], [JNSHAutoSize height:60])];
     }
     
     _messageLab.font = [UIFont systemFontOfSize:15];
@@ -92,8 +92,8 @@
     
     [self.cancleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(_contentView).offset(-[JNSHAutoSize height:60]);
-        make.left.equalTo(_contentView).offset([JNSHAutoSize width:44]);
-        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:71], [JNSHAutoSize height:26]));
+        make.left.equalTo(_contentView).offset([JNSHAutoSize width:40]);
+        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:80], [JNSHAutoSize height:30]));
     }];
     
     if (cancel != nil) {
@@ -107,7 +107,7 @@
     _sureBtn.layer.masksToBounds = YES;
     _sureBtn.backgroundColor = blueColor;
     _sureBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    _sureBtn.frame = CGRectMake([JNSHAutoSize width:(111)]/2.0, [JNSHAutoSize height:82], [JNSHAutoSize width:100], [JNSHAutoSize height:26]);
+    _sureBtn.frame = CGRectMake([JNSHAutoSize width:(111)]/2.0, [JNSHAutoSize height:82], [JNSHAutoSize width:110], [JNSHAutoSize height:30]);
     [_sureBtn addTarget:self action:@selector(sure) forControlEvents:UIControlEventTouchUpInside];
     [_contentView addSubview:_sureBtn];
     
@@ -117,8 +117,8 @@
         
         [_sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.cancleBtn);
-            make.right.equalTo(_contentView).offset(-[JNSHAutoSize width:84]);
-            make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:71], [JNSHAutoSize height:26]));
+            make.right.equalTo(_contentView).offset(-[JNSHAutoSize width:80]);
+            make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:80], [JNSHAutoSize height:30]));
         }];
     }
     

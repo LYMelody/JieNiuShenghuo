@@ -26,7 +26,11 @@
 
 #define greenColor [UIColor colorWithRed:32/255.0 green:151/255.0 blue:4/255.0 alpha:1]
 
+#define GrayColor [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1]
 
+#define LightGrayColor [UIColor colorWithRed:209/255.0 green:212/255.0 blue:221/255.0 alpha:1]
+
+#define linebackColor [UIColor colorWithRed:218/255.0 green:218/255.0 blue:218/255.0 alpha:1]
 
 
 

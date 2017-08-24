@@ -51,7 +51,7 @@
     [_leftLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.left.equalTo(self).offset([JNSHAutoSize width:16]);
-        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:80], [JNSHAutoSize height:20]));
+        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:90], [JNSHAutoSize height:20]));
     }];
     
     [_textFiled mas_makeConstraints:^(MASConstraintMaker *make) {
