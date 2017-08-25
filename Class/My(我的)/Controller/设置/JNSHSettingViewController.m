@@ -16,6 +16,7 @@
 #import "JNSHUserProtocolViewController.h"
 #import "JNSHAboutUsViewController.h"
 #import "JNSHFeedBackViewController.h"
+#import "JNSYUserInfo.h"
 @interface JNSHSettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -115,6 +116,11 @@
 - (void)logOut {
     
     NSLog(@"退出登录");
+    
+    [JNSYUserInfo getUserInfo].isLoggedIn = NO;
+    [JNSYUserInfo getUserInfo].userKey = KEY;
+    [JNSYUserInfo getUserInfo].userToken = TOKEN;
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 

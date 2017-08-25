@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "JNSHMainBarController.h"
-
+#import "JNSYUserInfo.h"
 @interface AppDelegate ()
 
 @end
@@ -34,6 +34,11 @@
     [application setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
    
     [application setStatusBarHidden:NO];
+    
+    
+    [JNSYUserInfo getUserInfo].userKey = KEY;
+    [JNSYUserInfo getUserInfo].userToken = TOKEN;
+    
     
     return YES;
 }

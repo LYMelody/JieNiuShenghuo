@@ -23,4 +23,8 @@
 
 @property(nonatomic,strong)UIImageView *rightIndicatorView;
 
+@property(nonatomic,strong)UILabel *logoInLab;
+
+@property(nonatomic,assign)BOOL isLogoedIn;
+
 @end

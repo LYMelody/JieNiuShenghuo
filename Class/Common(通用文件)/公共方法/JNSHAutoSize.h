@@ -14,4 +14,14 @@
 
 + (CGFloat)width:(CGFloat)width;
 
++ (void)showMsg:(NSString *)msg;
+
++ (NSString *)md5HexDigest:(NSString*)password;
+
++ (NSString *)getDiviceIMEI;
+
++ (NSString*)rePlaceString:(NSString*)string;
+
++ (NSString *)getTimeNow;
+
 @end

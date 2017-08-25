@@ -42,6 +42,11 @@
     _bottomLine.backgroundColor = ColorTableBackColor;
     [self.contentView addSubview:_bottomLine];
     
+    _rightImg = [[UIImageView alloc] init];
+    _rightImg.image = [UIImage imageNamed:@"password_checkmark_grey"];
+    _rightImg.hidden = YES;
+    [self.contentView addSubview:_rightImg];
+    
 }
 
 - (void)layoutSubviews {
@@ -66,6 +71,13 @@
         make.left.equalTo(self).offset([JNSHAutoSize width:16]);
         make.height.mas_equalTo([JNSHAutoSize height:SeperateLineWidth]);
     }];
+    
+    [_rightImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self);
+        make.right.equalTo(self).offset(-[JNSHAutoSize width:16]);
+        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:15], [JNSHAutoSize height:15]));
+    }];
+    
     
 }
 

@@ -20,6 +20,7 @@
 #import "JNSHTicketsController.h"
 #import "JNSHInvateController.h"
 #import "JNSHLoginController.h"
+#import "JNSYUserInfo.h"
 @interface JNSHMyViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 @end
@@ -29,6 +30,7 @@
     UIImageView *barBackImg;
     UIImageView *headImageView;
     UITableView *table;
+    BOOL islogoedIn;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -96,6 +98,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    islogoedIn = NO;
+    
     //返回按钮
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -138,7 +142,6 @@
     
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return 16;
@@ -162,7 +165,16 @@
             Cell.headerView.image = [UIImage imageNamed:@"my_head_portrait"];
             Cell.nickNameLab.text = @"小二家";
             Cell.phoneLab.text = @"188****8888";
-            Cell.showVip = YES;
+            islogoedIn = [JNSYUserInfo getUserInfo].isLoggedIn;
+            
+            if (islogoedIn) {
+                Cell.showVip = YES;
+                Cell.isLogoedIn = YES;
+            }else {
+                Cell.showVip = NO;
+                Cell.isLogoedIn = NO;
+            }
+            
             cell = Cell;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }else if (indexPath.row == 2|| indexPath.row == 4||indexPath.row == 7 || indexPath.row == 10 || indexPath.row == 14) {
@@ -270,17 +282,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 1) { //个人信息
-//        JNSYAccountMessageViewController *AccountVc = [[JNSYAccountMessageViewController alloc] init];
-//        AccountVc.hidesBottomBarWhenPushed = YES;
-//        
-//        [self.navigationController pushViewController:AccountVc animated:YES];
-        
-        JNSHLoginController *LogInVc = [[JNSHLoginController alloc] init];
-        //LogInVc.hidesBottomBarWhenPushed = YES;
-        
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:LogInVc];
-        
-        [self presentViewController:nav animated:YES completion:nil];
+
+        if (islogoedIn) {
+            JNSYAccountMessageViewController *AccountVc = [[JNSYAccountMessageViewController alloc] init];
+            AccountVc.hidesBottomBarWhenPushed = YES;
+    
+            [self.navigationController pushViewController:AccountVc animated:YES];
+        }else {
+            JNSHLoginController *LogInVc = [[JNSHLoginController alloc] init];
+            
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:LogInVc];
+            
+            [self presentViewController:nav animated:YES completion:nil];
+        }
         
     }
     

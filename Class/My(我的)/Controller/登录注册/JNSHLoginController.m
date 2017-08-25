@@ -11,11 +11,23 @@
 #import "JNSHCommonButton.h"
 #import "JNSHResignViewController.h"
 #import "JNSHForgetPwdViewController.h"
-@interface JNSHLoginController ()
+#import "SBJSON.h"
+#import "IBHttpTool.h"
+#import "JNSHAutoSize.h"
+#import "JNSYUserInfo.h"
+#import "MBProgressHUD.h"
+@interface JNSHLoginController ()<UITextFieldDelegate>
 
 @end
 
-@implementation JNSHLoginController
+@implementation JNSHLoginController {
+    
+    JNSHCommonButton *LogoInBtn;
+    
+    UITextField *pwdTextFiled;
+    UITextField *accountFiled;
+    MBProgressHUD *HUD;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -118,12 +130,16 @@
     }];
     
     //账户
-    UITextField *accountFiled = [[UITextField alloc] init];
+    accountFiled = [[UITextField alloc] init];
     accountFiled.font = [UIFont systemFontOfSize:15];
     accountFiled.textColor = ColorText;
     accountFiled.textAlignment = NSTextAlignmentLeft;
     accountFiled.placeholder = @"请输入11位手机号码";
     accountFiled.keyboardType = UIKeyboardTypeNumberPad;
+    accountFiled.delegate = self;
+    accountFiled.tag = 100;
+    accountFiled.text = @"18868825142";
+    accountFiled.clearButtonMode = UITextFieldViewModeAlways;
     UIImageView *accountLeftView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [JNSHAutoSize width:60], [JNSHAutoSize height:50])];
    
     UIImageView *accountLogoImg = [[UIImageView alloc] init];
@@ -159,11 +175,16 @@
     }];
     
     //密码
-    UITextField *pwdTextFiled = [[UITextField alloc] init];
+    pwdTextFiled = [[UITextField alloc] init];
     pwdTextFiled.font = [UIFont systemFontOfSize:15];
     pwdTextFiled.textColor = ColorText;
     pwdTextFiled.textAlignment = NSTextAlignmentLeft;
     pwdTextFiled.placeholder = @"请输入登录密码";
+    pwdTextFiled.delegate = self;
+    pwdTextFiled.tag = 101;
+    pwdTextFiled.secureTextEntry = YES;
+    pwdTextFiled.text = @"123456";
+    pwdTextFiled.clearButtonMode = UITextFieldViewModeAlways;
     UIImageView *pwdLeftView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [JNSHAutoSize width:60], [JNSHAutoSize height:50])];
     UIImageView *pwdLogoImg = [[UIImageView alloc] init];
     pwdLogoImg.image = [UIImage imageNamed:@"key"];
@@ -198,7 +219,7 @@
     }];
     
     //登录
-    JNSHCommonButton *LogoInBtn = [[JNSHCommonButton alloc] init];
+    LogoInBtn = [[JNSHCommonButton alloc] init];
     LogoInBtn.enabled =  NO;
     [LogoInBtn setTitle:@"登录" forState:UIControlStateNormal];
     [LogoInBtn addTarget:self action:@selector(logIn) forControlEvents:UIControlEventTouchUpInside];
@@ -210,6 +231,10 @@
         make.left.right.equalTo(logoBackImage);
         make.height.mas_equalTo([JNSHAutoSize height:41]);
     }];
+    
+    if (![accountFiled.text isEqualToString:@""] && ![pwdTextFiled.text isEqualToString:@""]) {
+        LogoInBtn.enabled = YES;
+    }
     
     //记住密码
     UIButton *remberBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -293,7 +318,89 @@
     
     NSLog(@"登录");
     
+    if ([accountFiled.text isEqualToString:@""] ) {
+        [JNSHAutoSize showMsg:@"账户名为空!"];
+        return;
+    }
+    if ([pwdTextFiled.text isEqualToString:@""]) {
+        [JNSHAutoSize showMsg:@"密码为空"];
+        return;
+    }
+    
+    
+   
+    
+    NSDictionary *dic = @{
+                          @"phone":accountFiled.text,
+                          @"pass":pwdTextFiled.text,
+                          };
+    NSString *action = @"UserLoginState";
+    NSDictionary *requestDic = @{
+                                 @"action":action,
+                                 @"token":TOKEN,
+                                 @"data":dic
+                                 };
+    NSString *params = [requestDic JSONFragment];
+    
+    [IBHttpTool postWithURL:JNSHTestUrl params:params success:^(id result) {
+        
+        NSLog(@"%@",result);
+        
+        NSDictionary *resultdic = [result JSONValue];
+        NSString *code = resultdic[@"code"];
+        
+        NSLog(@"%@,%@",resultdic,code);
+        if([code isEqualToString:@"000000"]) {
+            
+            //HUD
+            HUD = [[MBProgressHUD alloc] initWithView:self.view];
+            [self.view addSubview:HUD];
+            HUD.labelText = @"登录中...";
+            [HUD show:YES];
+            
+            [HUD hide:YES afterDelay:1.5];
+            
+            [JNSYUserInfo getUserInfo].isLoggedIn = YES;
+            [JNSYUserInfo getUserInfo].userCode = resultdic[@"userCode"];
+            [JNSYUserInfo getUserInfo].userPhone = resultdic[@"userPhone"];
+            [JNSYUserInfo getUserInfo].userName = resultdic[@"userName"];
+            [JNSYUserInfo getUserInfo].shopStates = resultdic[@"shopStates"];
+            [JNSYUserInfo getUserInfo].userToken = resultdic[@"userToken"];
+            [JNSYUserInfo getUserInfo].userKey = resultdic[@"userKey"];
+            [JNSYUserInfo getUserInfo].noticeFlg = resultdic[@"noticeFlg"];
+            [JNSYUserInfo getUserInfo].noticeTitle = resultdic[@"noticeTitle"];
+            [JNSYUserInfo getUserInfo].noticeText = resultdic[@"noticeText"];
+            
+            //获取广告图片
+           // [self getadvertiseImage];
+            
+            //登录环信
+            
+            //[self loginHXIM];
+            
+            [self performSelector:@selector(BackToLogin) withObject:nil afterDelay:1.5];
+            
+        }else {
+           
+            [HUD hide:YES];
+          
+            NSString *msg = resultdic[@"respMsg"];
+            [JNSHAutoSize showMsg:msg];
+            
+        }
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+
 }
+
+- (void)BackToLogin {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
 //注册
 - (void)resign {
     
@@ -311,6 +418,56 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
+
+#define mark textfiledDeleage
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    NSInteger length = (textField.text.length == range.location) ? range.location : (range.location - 1);
+    
+    if (textField.tag == 101) {
+        if (![accountFiled.text isEqualToString:@""] && (length >= 0)) {
+            LogoInBtn.enabled = YES;
+        }else {
+            LogoInBtn.enabled = NO;
+        }
+    }else if (textField.tag == 100) {
+        
+        if(![pwdTextFiled.text isEqualToString:@""] && (length >= 0)){
+            LogoInBtn.enabled = YES;
+        }else {
+            LogoInBtn.enabled = NO;
+        }
+        
+    }
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.frame = CGRectMake(self.view.frame.origin.x,  - [JNSHAutoSize height:100], KscreenWidth, KscreenHeight);
+    }];
+    
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.frame = CGRectMake(self.view.frame.origin.x,  0, KscreenWidth, KscreenHeight);
+    }];
+    
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    
+    
+    LogoInBtn.enabled = NO;
+    
+    return YES;
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

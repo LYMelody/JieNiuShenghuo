@@ -16,7 +16,7 @@
     if ([super init]) {
         
         self.showVip = NO;
-        
+        self.isLogoedIn = NO;
         [self setUpViews];
     }
     
@@ -50,7 +50,6 @@
     
     [self addSubview:_phoneLab];
     
-    
     _vipImgView = [[UIImageView alloc] init];
     _vipImgView.image = [UIImage imageNamed:@"my_head_vip"];
     _vipImgView.layer.masksToBounds = YES;
@@ -63,6 +62,13 @@
     
     [self addSubview:_rightIndicatorView];
     
+    _logoInLab = [[UILabel alloc] init];
+    _logoInLab.font = [UIFont systemFontOfSize:15];
+    _logoInLab.textColor = [UIColor whiteColor];
+    _logoInLab.textAlignment = NSTextAlignmentLeft;
+    _logoInLab.text = @"登录/注册";
+    _logoInLab.hidden = YES;
+    [self addSubview:_logoInLab];
     
 }
 
@@ -101,15 +107,49 @@
         make.size.mas_equalTo(CGSizeMake(8, 12));
     }];
     
+    [_logoInLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(_headerView);
+        make.left.equalTo(_headerView.mas_right).offset([JNSHAutoSize width:10]);
+        make.size.mas_equalTo(CGSizeMake([JNSHAutoSize width:100], [JNSHAutoSize height:20]));
+    }];
+    
+    
 }
 
 - (void)setShowVip:(BOOL)showVip {
+    
+    _showVip = showVip;
     
     if (showVip) {
         _vipImgView.hidden = NO;
     }else {
         _vipImgView.hidden = YES;
     }
+    
+}
+
+
+- (void)setIsLogoedIn:(BOOL)isLogoedIn {
+    
+    _isLogoedIn = isLogoedIn;
+    
+    if (isLogoedIn) {
+        _logoInLab.hidden = YES;
+        _nickNameLab.hidden = NO;
+        _phoneLab.hidden = NO;
+        
+        
+    }else {
+        
+        _nickNameLab.hidden = YES;
+        _phoneLab.hidden = YES;
+        
+        _logoInLab.hidden = NO;
+        _headerView.image = [UIImage imageNamed:@"my_head_portrait_grey"];
+    }
+    
+    
+    
     
 }
 

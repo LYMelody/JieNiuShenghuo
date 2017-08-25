@@ -17,4 +17,7 @@
 
 @property(nonatomic,strong)UIImageView *bottomLine;
 
+@property(nonatomic,strong)UIImageView *rightImg;
+
+
 @end

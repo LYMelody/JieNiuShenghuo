@@ -9,6 +9,14 @@
 #ifndef JNSHCommon_h
 #define JNSHCommon_h
 
+#define JNSHTestUrl @"http://api.test.life.hzjieniu.com/app/action"
+#define TOKEN @"63b407c3d510bf14851ce46df94662b5"
+#define KEY @"UBKKWNA216MXCGVJWG5W69VOORNWKV82"
+
+
+#define BundleID [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey]
+
+
 #define KscreenWidth [UIScreen mainScreen].bounds.size.width
 #define KscreenHeight [UIScreen mainScreen].bounds.size.height
 #define SeperateLineWidth 0.3
